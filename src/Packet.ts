@@ -50,28 +50,22 @@ export class Packet {
 
     /**
      * Write VarInt
-     * @param value
+     * @param value Must be between `-2³¹` and `2³¹ - 1` (inclusive)
      */
     public static writeVarInt(value: number): Buffer {
-        const buffer = Buffer.alloc(5);
-        let index = 0;
-
-        while (true) {
+        if (value >= 2_147_483_648) throw new RangeError("Maximum VarInt value is 2,147,483,647 (= 2³¹ - 1)");
+        if (value < -2_147_483_648) throw new RangeError("Minimum VarInt value is -2,147,483,648 (= -2³¹)");
+        const data: number[] = [];
+        do {
             let byte = value & 0x7F;
             value >>>= 7;
-
             if (value !== 0) {
                 byte |= 0x80;
             }
+            data.push(byte);
+        } while (value !== 0);
 
-            buffer[index++] = byte;
-
-            if (value === 0) {
-                break;
-            }
-        }
-
-        return buffer.subarray(0, index);
+        return Buffer.from(data);
     }
 }
 
