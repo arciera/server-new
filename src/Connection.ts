@@ -1,10 +1,12 @@
 import net from "node:net";
 import {Server} from "./Server";
+import {EventEmitter} from "./EventEmitter";
+import {Event} from "./event/Event";
 
 /**
  * A TCP socket connection on the server
  */
-export class Connection {
+export class Connection extends EventEmitter {
     /**
      * The client protocol version
      */
@@ -29,7 +31,26 @@ export class Connection {
          * The connection socket
          */
         public readonly socket: net.Socket
-    ) {};
+    ) {
+        super();
+        const remoteAddress = this.socket.remoteAddress;
+        const remotePort = this.socket.remotePort;
+        this.#id = remoteAddress === undefined || remotePort === undefined ? null : `${remoteAddress}:${remotePort}`;
+    };
+
+    /**
+     * Broadcast an event to all subscribed listeners on:
+     *
+     * 1. this connection
+     * 2. this connection's server
+     *
+     * (in that order)
+     * @param event
+     */
+    public override emit<T extends Event>(event: T): void {
+        super.emit(event);
+        this.server.emit(event);
+    }
 }
 
 export namespace Connection {
