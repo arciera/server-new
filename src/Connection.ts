@@ -17,6 +17,8 @@ export class Connection extends EventEmitter {
      */
     public state: Connection.State | null = null;
 
+    readonly #id: `${string}:${number}` | null = null;
+
     /**
      * Create a new connection instance
      * @param server The server
@@ -50,6 +52,15 @@ export class Connection extends EventEmitter {
     public override emit<T extends Event>(event: T): void {
         super.emit(event);
         this.server.emit(event);
+    }
+
+    /**
+     * Connections are identified by their source address and port
+     *
+     * @return `null` if the connection was not properly established, otherwise "ip:port"
+     */
+    public get id(): `${string}:${number}` | null {
+        return this.#id;
     }
 }
 
