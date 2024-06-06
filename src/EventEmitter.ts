@@ -34,4 +34,23 @@ export abstract class EventEmitter<E extends Event = Event> {
             listener._run(event);
         }
     }
+
+    /**
+     * Remove all event listeners
+     */
+    public removeListeners(): void;
+
+    /**
+     * Remove an event listener
+     * @param event The event constructor class
+     */
+    public removeListeners(event: new (...args: any[]) => E): void;
+
+    /** @internal **/
+    public removeListeners(event?: new (...args: any[]) => E): void {
+        if (event === undefined)
+            this.listeners.clear();
+        else
+            this.listeners.delete(event.name);
+    }
 }
