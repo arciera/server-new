@@ -35,9 +35,22 @@ export class Packet {
      * Check if this packet is complete
      *
      * A VarInt is read from the beginning of the packet and compared to the packet's current buffer length.
+     * @param size The supposed size of the packet, if already known. If not provided, it is read from the beginning of the packet
      */
-    public isComplete(): boolean {
-        return this.buffer().byteLength === Packet.readVarInt(this.buffer()).value;
+    public isComplete(size?: Packet.ParseResult<number>): boolean {
+        const finalSize = size ?? this.size();
+        if (finalSize === null) return false;
+        return Packet.isComplete(this.buffer(), finalSize);
+    }
+
+    /**
+     * Check if a buffer is a complete packet
+     * @param data The buffer data
+     * @param size The supposed size of the packet, if already known. If not provided, it is read from the beginning of the buffer
+     */
+    public static isComplete(data: Buffer, size: Packet.ParseResult<number> = Packet.readVarInt(data)): boolean {
+        if (size === null) return false;
+        return data.byteLength - size.length === size.value;
     }
 
     /**
