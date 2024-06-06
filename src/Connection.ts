@@ -6,6 +6,16 @@ import {Server} from "./Server";
  */
 export class Connection {
     /**
+     * The client protocol version
+     */
+    public protocol: number | null = null;
+
+    /**
+     * The connection state
+     */
+    public state: Connection.State | null = null;
+
+    /**
      * Create a new connection instance
      * @param server The server
      * @param socket The connection socket
@@ -20,4 +30,13 @@ export class Connection {
          */
         public readonly socket: net.Socket
     ) {};
+}
+
+export namespace Connection {
+    export enum State {
+        STATUS,
+        LOGIN,
+        CONFIGURATION,
+        PLAY
+    }
 }
