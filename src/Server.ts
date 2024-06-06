@@ -3,6 +3,8 @@ import {ConnectedEvent} from "./event/ConnectedEvent";
 import {Connection} from "./Connection";
 import {ServerListeningEvent} from "./event/ServerListeningEvent";
 import {PluginManager} from "./PluginManager";
+import {ConnectionEndEvent} from "./event/ConnectionEndEvent";
+import {IncomingDataEvent} from "./event/IncomingDataEvent";
 import {EventEmitter} from "./EventEmitter";
 
 /**
@@ -41,6 +43,9 @@ export class Server extends EventEmitter {
     private tcpServer: net.Server = new net.Server(this.connectionListener.bind(this));
 
     private connectionListener (socket: net.Socket) {
-        this.emit(new ConnectedEvent(new Connection(this, socket)));
+        const connection = new Connection(this, socket);
+        this.emit(new ConnectedEvent(connection));
+        connection.socket.once("end", () => connection.emit(new ConnectionEndEvent(connection)));
+        connection.socket.on("data", data => connection.emit(new IncomingDataEvent(connection, data)));
     }
 }
