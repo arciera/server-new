@@ -6,6 +6,7 @@ import {PluginManager} from "./PluginManager";
 import {ConnectionEndEvent} from "./event/ConnectionEndEvent";
 import {IncomingDataEvent} from "./event/IncomingDataEvent";
 import {EventEmitter} from "./EventEmitter";
+import {ConnectionManager} from "./ConnectionManager";
 
 /**
  * Arciera server
@@ -28,6 +29,11 @@ export class Server extends EventEmitter {
      * This server's plugin manager
      */
     public plugins = new PluginManager(this);
+
+    /**
+     * This server's connection manager
+     */
+    public connections = new ConnectionManager(this);
 
     /**
      * Opens the server for connections
