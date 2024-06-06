@@ -32,6 +32,22 @@ export class Packet {
     }
 
     /**
+     * Get the ID of this packet
+     */
+    public id(): number | null {
+        try {
+            const size = this.size();
+            if (size === null || !this.isComplete(size)) return null;
+            const id = Packet.readVarInt(this.buffer(), size.length).value;
+            if (id < 0) return null;
+            return id;
+        }
+        catch (e) {
+            return null;
+        }
+    }
+
+    /**
      * Check if this packet is complete
      *
      * A VarInt is read from the beginning of the packet and compared to the packet's current buffer length.
