@@ -20,6 +20,18 @@ export class Packet {
     }
 
     /**
+     * Get the size of this packet
+     */
+    public size(): Packet.ParseResult<number> | null {
+        try {
+            return Packet.readVarInt(this.buffer());
+        }
+        catch (e) {
+            return null;
+        }
+    }
+
+    /**
      * Check if this packet is complete
      *
      * A VarInt is read from the beginning of the packet and compared to the packet's current buffer length.
