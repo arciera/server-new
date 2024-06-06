@@ -1,12 +1,12 @@
 import net from "node:net";
 import {Server} from "./Server";
 import {EventEmitter} from "./EventEmitter";
-import {Event} from "./event/Event";
+import {ConnectionEvent} from "./event/ConnectionEvent";
 
 /**
  * A TCP socket connection on the server
  */
-export class Connection extends EventEmitter {
+export class Connection extends EventEmitter<ConnectionEvent> {
     /**
      * The client protocol version
      */
@@ -49,7 +49,7 @@ export class Connection extends EventEmitter {
      * (in that order)
      * @param event
      */
-    public override emit<T extends Event>(event: T): void {
+    public override emit<T extends ConnectionEvent>(event: T): void {
         super.emit(event);
         this.server.emit(event);
     }

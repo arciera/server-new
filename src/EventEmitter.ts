@@ -1,7 +1,7 @@
 import {Listener} from "./Listener";
 import {Event} from "./event/Event";
 
-export abstract class EventEmitter {
+export abstract class EventEmitter<E extends Event = Event> {
     private listeners: Map<string, Listener<any>[]> = new Map();
 
     /**
@@ -9,7 +9,7 @@ export abstract class EventEmitter {
      * @param event The event constructor class
      * @param listener
      */
-    public on<T extends Event>(event: new (...args: any[]) => T, listener: Listener<T>): void {
+    public on<T extends E>(event: new (...args: any[]) => T, listener: Listener<T>): void {
         if (!this.listeners.has(event.name))
             this.listeners.set(event.name, []);
         const listeners = this.listeners.get(event.name)!;
@@ -27,7 +27,7 @@ export abstract class EventEmitter {
      * Broadcast an event to all subscribed listeners
      * @param event
      */
-    public emit<T extends Event>(event: T): void {
+    public emit<T extends E>(event: T): void {
         const listeners = this.listeners.get(event.constructor.name) ?? [];
         for (const listener of listeners) {
             if (event.cancelled()) break;
