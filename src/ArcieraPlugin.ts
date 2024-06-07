@@ -14,15 +14,19 @@ export abstract class ArcieraPlugin {
         return this.constructor.name.toLowerCase();
     }
 
-
     /**
-     * Get this plugin's ID
+     * Get this plugin's name
      */
-    public static id(): string {
-        return this.name.toLowerCase();
+    public name(): string {
+        return this.constructor.name;
     }
 
     #server: Server | null = null;
+    readonly #logger = new Logger("plugin/" + this.name());
+
+    public getLogger(): Logger {
+        return this.#logger;
+    }
 
     /**
      * @internal

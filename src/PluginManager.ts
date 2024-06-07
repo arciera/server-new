@@ -54,6 +54,7 @@ export class PluginManager {
      * @param plugin
      */
     public load(plugin: ArcieraPlugin) {
+        plugin.getLogger().info("Loading plugin " + plugin.name());
         this.#plugins.set(plugin.id(),plugin);
         plugin._load(this.server);
     }
@@ -63,6 +64,7 @@ export class PluginManager {
      * @param plugin
      */
     public unload(plugin: ArcieraPlugin) {
+        plugin.getLogger().info("Unloading plugin " + plugin.name());
         plugin._unload();
         this.#plugins.delete(plugin.id());
     }
