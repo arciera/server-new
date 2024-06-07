@@ -7,22 +7,27 @@ import {ConnectionEndEvent} from "./event/ConnectionEndEvent.js";
 import {IncomingDataEvent} from "./event/IncomingDataEvent.js";
 import {EventEmitter} from "./EventEmitter.js";
 import {ConnectionManager} from "./ConnectionManager.js";
+import {Logger} from "./Logger.js";
 
 /**
  * Arciera server
  */
 export class Server extends EventEmitter {
+    public logger: Logger;
     /**
      * Create new server
-     * @param port port on which the server is listening for connections
+     * @param port Port on which the server is listening for connections
+     * @param logLevel Minimum log level required to display log messages
      */
     public constructor(
         /**
          * Port on which the server is listening for connections
          */
-        public readonly port: number
+        public readonly port: number,
+        logLevel: Logger.Level
     ) {
         super();
+        this.logger = new Logger("Server", logLevel);
     }
 
     /**
@@ -43,6 +48,7 @@ export class Server extends EventEmitter {
             this.tcpServer.once("listening", resolve);
             this.tcpServer.listen(this.port);
         });
+        this.logger.info("Server listening on port " + this.port);
         this.emit(new ServerListeningEvent(this));
     }
 
