@@ -1,5 +1,5 @@
-import {ConnectionEvent} from "./ConnectionEvent";
-import {Connection} from "../Connection";
+import {ConnectionEvent} from "./ConnectionEvent.js";
+import {Connection} from "../Connection.js";
 
 /**
  * Fired for any data that comes from the connection

@@ -1,7 +1,7 @@
 import net from "node:net";
-import {Server} from "./Server";
-import {EventEmitter} from "./EventEmitter";
-import {ConnectionEvent} from "./event/ConnectionEvent";
+import {Server} from "./Server.js";
+import {EventEmitter} from "./EventEmitter.js";
+import {ConnectionEvent} from "./event/ConnectionEvent.js";
 
 /**
  * A TCP socket connection on the server

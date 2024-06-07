@@ -1,9 +1,9 @@
-import {Connection} from "./Connection";
-import {Packet} from "./Packet";
-import {Server} from "./Server";
-import {IncomingDataEvent} from "./event/IncomingDataEvent";
-import {Listener} from "./Listener";
-import {PacketEvent} from "./event/PacketEvent";
+import {Connection} from "./Connection.js";
+import {Packet} from "./Packet.js";
+import {Server} from "./Server.js";
+import {IncomingDataEvent} from "./event/IncomingDataEvent.js";
+import {Listener} from "./Listener.js";
+import {PacketEvent} from "./event/PacketEvent.js";
 
 /**
  * Manages active TCP connections connected to the server. Also tracks packet fragments and emits full packets when

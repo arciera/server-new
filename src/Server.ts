@@ -1,12 +1,12 @@
 import net from "node:net";
-import {ConnectedEvent} from "./event/ConnectedEvent";
-import {Connection} from "./Connection";
-import {ServerListeningEvent} from "./event/ServerListeningEvent";
-import {PluginManager} from "./PluginManager";
-import {ConnectionEndEvent} from "./event/ConnectionEndEvent";
-import {IncomingDataEvent} from "./event/IncomingDataEvent";
-import {EventEmitter} from "./EventEmitter";
-import {ConnectionManager} from "./ConnectionManager";
+import {ConnectedEvent} from "./event/ConnectedEvent.js";
+import {Connection} from "./Connection.js";
+import {ServerListeningEvent} from "./event/ServerListeningEvent.js";
+import {PluginManager} from "./PluginManager.js";
+import {ConnectionEndEvent} from "./event/ConnectionEndEvent.js";
+import {IncomingDataEvent} from "./event/IncomingDataEvent.js";
+import {EventEmitter} from "./EventEmitter.js";
+import {ConnectionManager} from "./ConnectionManager.js";
 
 /**
  * Arciera server

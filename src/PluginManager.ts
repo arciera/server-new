@@ -1,5 +1,5 @@
-import {Server} from "./Server";
-import {ArcieraPlugin} from "./ArcieraPlugin";
+import {Server} from "./Server.js";
+import {ArcieraPlugin} from "./ArcieraPlugin.js";
 
 /**
  * Arciera plugin manager

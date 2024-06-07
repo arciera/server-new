@@ -1,5 +1,6 @@
-import {Server} from "./Server";
-import {PluginNotLoadedError} from "./error/PluginNotLoadedError";
+import {Server} from "./Server.js";
+import {PluginNotLoadedError} from "./error/PluginNotLoadedError.js";
+import {Logger} from "./Logger.js";
 
 /**
  * An arciera plugin

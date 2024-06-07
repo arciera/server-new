@@ -1,5 +1,5 @@
-import {Event} from "./Event";
-import {Server} from "../Server";
+import {Event} from "./Event.js";
+import {Server} from "../Server.js";
 
 /**
  * The server is listening and open for connections

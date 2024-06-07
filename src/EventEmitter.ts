@@ -1,5 +1,5 @@
-import {Listener} from "./Listener";
-import {Event} from "./event/Event";
+import {Listener} from "./Listener.js";
+import {Event} from "./event/Event.js";
 
 export abstract class EventEmitter<E extends Event = Event> {
     private listeners: Map<string, Listener<any>[]> = new Map();

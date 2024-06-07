@@ -1,5 +1,5 @@
-import {ConnectionEvent} from "./ConnectionEvent";
-import {Connection} from "../Connection";
+import {ConnectionEvent} from "./ConnectionEvent.js";
+import {Connection} from "../Connection.js";
 
 /**
  * The first packet sent by the client. This causes the server to switch into the target state.

@@ -1,4 +1,4 @@
-import {ArcieraPlugin} from "../ArcieraPlugin";
+import {ArcieraPlugin} from "../ArcieraPlugin.js";
 
 /**
  * Plugin is not loaded

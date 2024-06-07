@@ -1,5 +1,5 @@
-import {Event} from "./Event";
-import {Connection} from "../Connection";
+import {Event} from "./Event.js";
+import {Connection} from "../Connection.js";
 
 /**
  * An event associated with a connection

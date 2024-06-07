@@ -1,6 +1,6 @@
-import {ConnectionEvent} from "./ConnectionEvent";
-import {Connection} from "../Connection";
-import {Packet} from "../Packet";
+import {ConnectionEvent} from "./ConnectionEvent.js";
+import {Connection} from "../Connection.js";
+import {Packet} from "../Packet.js";
 
 /**
  * A full packet was received. The {@link Packet#isComplete} should be true.
